@@ -1,0 +1,79 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>
+                    <i class="fas fa-landmark"></i>
+                    Gestion Patrimoine
+                </h3>
+                <p>
+                    Votre partenaire de confiance pour la gestion et l'optimisation
+                    de votre patrimoine immobilier et financier.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section links">
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Accueil</a></li>
+                    <li><a href="{% url 'about' %}">À propos</a></li>
+                    <li><a href="{% url 'services' %}">Nos Services</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section services">
+                <h4>Nos Services</h4>
+                <ul>
+                    <li><a href="#">Gestion Immobilière</a></li>
+                    <li><a href="#">Conseil en Investissement</a></li>
+                    <li><a href="#">Optimisation Fiscale</a></li>
+                    <li><a href="#">Succession & Transmission</a></li>
+                    <li><a href="#">Assurance Vie</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Avenue des Champs-Élysées<br>75008 Paris, France</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>+33 1 23 45 67 89</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@gestionpatrimoine.fr</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Lun - Ven: 9h - 18h</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; {% now "Y" %} Gestion Patrimoine. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="{% url 'privacy' %}">Politique de confidentialité</a>
+                    <span>|</span>
+                    <a href="{% url 'terms' %}">Conditions d'utilisation</a>
+                    <span>|</span>
+                    <a href="{% url 'mentions' %}">Mentions légales</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

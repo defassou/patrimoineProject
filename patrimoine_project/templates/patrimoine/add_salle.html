@@ -1,0 +1,871 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ajouter une Salle - Gestion Patrimoine{% endblock %}
+
+{% block extra_css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .add-salle-wrapper {
+        min-height: calc(100vh - 200px);
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 3rem 0;
+    }
+
+    .add-salle-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .page-header h1 {
+        color: #1e3c72;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        font-weight: 700;
+    }
+
+    .page-header .breadcrumb {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        color: #666;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+    }
+
+    .page-header .breadcrumb a {
+        color: #1e3c72;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .page-header .breadcrumb a:hover {
+        color: #ffd700;
+    }
+
+    .form-card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .form-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: #fff;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .form-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+        opacity: 0.9;
+        font-size: 0.95rem;
+    }
+
+    .form-body {
+        padding: 2.5rem;
+    }
+
+    .form-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .form-section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .form-section-title {
+        color: #1e3c72;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+
+    .form-section-title i {
+        color: #ffd700;
+        font-size: 1.4rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        font-size: 0.95rem;
+    }
+
+    .form-group label .required {
+        color: #e74c3c;
+        margin-left: 3px;
+        font-size: 1.1rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.9rem 1.1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        background: #fafafa;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #1e3c72;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.1);
+    }
+
+    .form-control:hover {
+        border-color: #c0c0c0;
+    }
+
+    .form-control.error {
+        border-color: #e74c3c;
+        background: #fff5f5;
+    }
+
+    textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+        line-height: 1.6;
+    }
+
+    select.form-control {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1.2rem center;
+        padding-right: 3rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .form-row-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 1.1rem;
+        color: #666;
+        pointer-events: none;
+        font-size: 1.1rem;
+        z-index: 1;
+    }
+
+    .input-group .form-control {
+        padding-left: 3rem;
+    }
+
+    .input-suffix {
+        position: absolute;
+        right: 1.1rem;
+        color: #666;
+        font-weight: 600;
+        pointer-events: none;
+    }
+
+    .help-text {
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .help-text i {
+        color: #17a2b8;
+        font-size: 0.9rem;
+    }
+
+    .error-message {
+        color: #e74c3c;
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-weight: 500;
+    }
+
+    .error-message i {
+        font-size: 0.9rem;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .btn {
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        text-align: center;
+        justify-content: center;
+        min-width: 180px;
+    }
+
+    .btn i {
+        font-size: 1.1rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .btn-secondary {
+        background: #fff;
+        color: #666;
+        border: 2px solid #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+        background: #f8f9fa;
+        border-color: #1e3c72;
+        color: #1e3c72;
+    }
+
+    .alert {
+        padding: 1.2rem 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 500;
+        animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .alert i {
+        font-size: 1.3rem;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border-left: 4px solid #28a745;
+    }
+
+    .alert-error, .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border-left: 4px solid #dc3545;
+    }
+
+    .alert-warning {
+        background: #fff3cd;
+        color: #856404;
+        border-left: 4px solid #ffc107;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border-left: 4px solid #17a2b8;
+    }
+
+    .errorlist {
+        list-style: none;
+        padding: 0;
+        margin: 0.4rem 0 0 0;
+    }
+
+    .errorlist li {
+        color: #e74c3c;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .errorlist li::before {
+        content: "⚠";
+        font-size: 1rem;
+    }
+
+    /* Loading State */
+    .btn.loading {
+        position: relative;
+        color: transparent;
+        pointer-events: none;
+    }
+
+    .btn.loading::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #1e3c72;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Info Box */
+    .info-box {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 1rem 1.2rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: start;
+        gap: 1rem;
+    }
+
+    .info-box i {
+        color: #2196F3;
+        font-size: 1.3rem;
+        margin-top: 0.2rem;
+    }
+
+    .info-box-content {
+        flex: 1;
+    }
+
+    .info-box-content strong {
+        display: block;
+        color: #1565C0;
+        margin-bottom: 0.3rem;
+    }
+
+    .info-box-content p {
+        color: #0d47a1;
+        font-size: 0.9rem;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .add-salle-wrapper {
+            padding: 1.5rem 0;
+        }
+
+        .add-salle-container {
+            padding: 0 1rem;
+        }
+
+        .form-body {
+            padding: 1.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.8rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .page-header h1 i {
+            font-size: 2rem;
+        }
+
+        .form-row, .form-row-3 {
+            grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+            flex-direction: column-reverse;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .form-header {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .page-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .form-section-title {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="add-salle-wrapper">
+    <div class="add-salle-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>
+                <i class="fas fa-door-open"></i>
+                Ajouter une Salle
+            </h1>
+            <div class="breadcrumb">
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i> Accueil</a>
+                <span>/</span>
+                <a href="{% url 'list_salle' %}">Salles</a>
+                <span>/</span>
+                <span>Ajouter</span>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' or message.tags == 'danger' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <!-- Form Header -->
+            <div class="form-header">
+                <h2>Formulaire d'Enregistrement</h2>
+                <p>Remplissez les informations de la nouvelle salle</p>
+            </div>
+
+            <!-- Form Body -->
+            <div class="form-body">
+                <form method="post" enctype="multipart/form-data" id="addSalleForm">
+                    {% csrf_token %}
+
+                    <!-- Info Box -->
+                    <div class="info-box">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="info-box-content">
+                            <strong>Information importante</strong>
+                            <p>Les champs marqués d'un astérisque (<span style="color: #e74c3c;">*</span>) sont obligatoires.</p>
+                        </div>
+                    </div>
+
+                    <!-- Section 1: Informations Générales -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Informations Générales
+                        </h3>
+
+                        <div class="form-group">
+                            <label for="{{ form.nom.id_for_label }}">
+                                Nom de la salle <span class="required">*</span>
+                            </label>
+                            <div class="input-group">
+                                <i class="fas fa-door-open input-icon"></i>
+                                {{ form.nom }}
+                            </div>
+                            {% if form.nom.errors %}
+                                {{ form.nom.errors }}
+                            {% endif %}
+                            <small class="help-text">
+                                <i class="fas fa-lightbulb"></i>
+                                Exemple: Salle de réunion A, Bureau 101, etc.
+                            </small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="{{ form.numero.id_for_label }}">
+                                    Numéro <span class="required">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-hashtag input-icon"></i>
+                                    {{ form.numero }}
+                                </div>
+                                {% if form.numero.errors %}
+                                    {{ form.numero.errors }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.etage.id_for_label }}">
+                                    Étage <span class="required">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-layer-group input-icon"></i>
+                                    {{ form.etage }}
+                                </div>
+                                {% if form.etage.errors %}
+                                    {{ form.etage.errors }}
+                                {% endif %}
+                                <small class="help-text">
+                                    <i class="fas fa-lightbulb"></i>
+                                    0 pour RDC, -1 pour sous-sol
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.batiment.id_for_label }}">
+                                Bâtiment <span class="required">*</span>
+                            </label>
+                            <div class="input-group">
+                                <i class="fas fa-building input-icon"></i>
+                                {{ form.batiment }}
+                            </div>
+                            {% if form.batiment.errors %}
+                                {{ form.batiment.errors }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Caractéristiques -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-ruler-combined"></i>
+                            Caractéristiques
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="{{ form.surface.id_for_label }}">
+                                    Surface <span class="required">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-expand-arrows-alt input-icon"></i>
+                                    {{ form.surface }}
+                                    <span class="input-suffix">m²</span>
+                                </div>
+                                {% if form.surface.errors %}
+                                    {{ form.surface.errors }}
+                                {% endif %}
+                                <small class="help-text">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Surface en mètres carrés
+                                </small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.capacite.id_for_label }}">
+                                    Capacité
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-users input-icon"></i>
+                                    {{ form.capacite }}
+                                    <span class="input-suffix">pers.</span>
+                                </div>
+                                {% if form.capacite.errors %}
+                                    {{ form.capacite.errors }}
+                                {% endif %}
+                                <small class="help-text">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Nombre maximum de personnes
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.type.id_for_label }}">
+                                Type de salle <span class="required">*</span>
+                            </label>
+                            <div class="input-group">
+                                <i class="fas fa-tag input-icon"></i>
+                                {{ form.type }}
+                            </div>
+                            {% if form.type.errors %}
+                                {{ form.type.errors }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Section 3: État et Disponibilité -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-toggle-on"></i>
+                            État et Disponibilité
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="{{ form.statut.id_for_label }}">
+                                    Statut <span class="required">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-check-circle input-icon"></i>
+                                    {{ form.statut }}
+                                </div>
+                                {% if form.statut.errors %}
+                                    {{ form.statut.errors }}
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.prix_location.id_for_label }}">
+                                    Prix de location
+                                </label>
+                                <div class="input-group">
+                                    <i class="fas fa-euro-sign input-icon"></i>
+                                    {{ form.prix_location }}
+                                    <span class="input-suffix">€/jour</span>
+                                </div>
+                                {% if form.prix_location.errors %}
+                                    {{ form.prix_location.errors }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Description et Équipements -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            <i class="fas fa-align-left"></i>
+                            Informations Complémentaires
+                        </h3>
+
+                        <div class="form-group">
+                            <label for="{{ form.description.id_for_label }}">
+                                Description
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                {{ form.description.errors }}
+                            {% endif %}
+                            <small class="help-text">
+                                <i class="fas fa-lightbulb"></i>
+                                Décrivez la salle, ses particularités, son aménagement...
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.equipements.id_for_label }}">
+                                Équipements disponibles
+                            </label>
+                            {{ form.equipements }}
+                            {% if form.equipements.errors %}
+                                {{ form.equipements.errors }}
+                            {% endif %}
+                            <small class="help-text">
+                                <i class="fas fa-lightbulb"></i>
+                                Listez les équipements: Projecteur, Wi-Fi, Climatisation, etc.
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="{% url 'liste_salles' %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i>
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="fas fa-save"></i>
+                            Enregistrer la salle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('addSalleForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Auto-focus sur le premier champ
+        const firstInput = form.querySelector('input[type="text"]');
+        if (firstInput) {
+            firstInput.focus();
+        }
+
+        // Ajouter les classes CSS aux champs du formulaire Django
+        const formFields = form.querySelectorAll('input, select, textarea');
+        formFields.forEach(field => {
+            if (!field.classList.contains('form-control')) {
+                field.classList.add('form-control');
+            }
+
+            // Ajouter la classe error si le champ a des erreurs
+            const errorList = field.parentElement.querySelector('.errorlist');
+            if (errorList) {
+                field.classList.add('error');
+            }
+        });
+
+        // Validation du formulaire
+        form.addEventListener('submit', function(e) {
+            const surface = form.querySelector('[name="surface"]');
+            const capacite = form.querySelector('[name="capacite"]');
+
+            let isValid = true;
+            let errorMessage = '';
+
+            // Validation de la surface
+            if (surface && surface.value) {
+                const surfaceValue = parseFloat(surface.value);
+                if (surfaceValue <= 0) {
+                    isValid = false;
+                    errorMessage = 'La surface doit être supérieure à 0';
+                    surface.classList.add('error');
+                }
+            }
+
+            // Validation de la capacité
+            if (capacite && capacite.value) {
+                const capaciteValue = parseInt(capacite.value);
+                if (capaciteValue < 0) {
+                    isValid = false;
+                    errorMessage = 'La capacité ne peut pas être négative';
+                    capacite.classList.add('error');
+                }
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+                alert(errorMessage);
+                return false;
+            }
+
+            // Loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+        });
+
+        // Retirer la classe error lors de la modification du champ
+        formFields.forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('error');
+            });
+        });
+
+        // Validation en temps réel pour les champs numériques
+        const numericFields = form.querySelectorAll('input[type="number"]');
+        numericFields.forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.value && parseFloat(this.value) < 0) {
+                    this.classList.add('error');
+                    
+                    // Créer un message d'erreur s'il n'existe pas
+                    let errorMsg = this.parentElement.parentElement.querySelector('.error-message');
+                    if (!errorMsg) {
+                        errorMsg = document.createElement('small');
+                        errorMsg.className = 'error-message';
+                        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> La valeur ne peut pas être négative';
+                        this.parentElement.parentElement.appendChild(errorMsg);
+                    }
+                } else {
+                    const errorMsg = this.parentElement.parentElement.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.remove();
+                    }
+                }
+            });
+        });
+
+        // Confirmation avant de quitter si le formulaire a été modifié
+        let formModified = false;
+        formFields.forEach(field => {
+            field.addEventListener('change', function() {
+                formModified = true;
+            });
+        });
+
+        const cancelBtn = document.querySelector('.btn-secondary');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', function(e) {
+                if (formModified) {
+                    if (!confirm('Vous avez des modifications non enregistrées. Voulez-vous vraiment quitter ?')) {
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

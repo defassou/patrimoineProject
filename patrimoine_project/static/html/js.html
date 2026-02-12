@@ -1,0 +1,63 @@
+{% load static %}
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'pages/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'pages/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{% static 'pages/js/sb-admin-2.min.js' %}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'pages/vendor/chart.js/Chart.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'pages/js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'pages/js/demo/chart-pie-demo.js' %}"></script>
+
+<!-- Page level plugins -->
+<script src="{% static 'pages/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'pages/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{% static 'pages/js/demo/datatables-demo.js' %}"></script>
+
+<script>
+    var form = document.getElementById("form-csv");
+    var send_csv = document.getElementById("submit-csv");
+    var print
+
+
+    $(function(){
+        $('#id_file').change(function(){
+            var file = document.getElementById("id_file").files.length;
+            console.log(file);
+            if (file==0){
+                $('#submit-csv').slideUp('slow').delay(1500);
+            }else{
+                //$('#submit-csv').slideDown('slow').delay(1500).slideUp('slow');
+                $('#submit-csv').slideDown('slow').delay(1500);
+            }
+        });
+    });
+
+    send_csv.addEventListener("click", function () {
+        //console.log(file);
+        form.submit();
+    });
+
+    $(document).ready(function() {
+        $('#submit-csv').slideUp('slow').delay(1500).slideUp('slow');
+        //send_csv.slideUp();
+        setTimeout(function(){
+            $(".alert").each(function(index){
+                $(this).delay(200*index).fadeTo(1500,0).slideUp(500,function(){
+                    $(this).remove();
+                });
+            });
+        },3000);
+    });
+
+</script>

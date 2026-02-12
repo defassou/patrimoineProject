@@ -1,0 +1,28 @@
+#logo{
+    height:56px;
+    width:55px;
+}
+
+#body{
+    background: #ebeff5;
+    min-height: 500px;
+    background-image: url(/media/background.png);
+    background-size: cover;
+    background-position: center top;
+}
+
+dl.fieldList dt {
+    display: block;
+    width: 250px;
+    float: left;
+    text-align: right;
+    padding: 0 10px 0 0;
+    font-weight: bold;
+}
+
+dl.fieldList dd {
+    display: block;
+    width: 450px;
+    padding: 0px;
+    margin: 0 0 10px 0;
+}

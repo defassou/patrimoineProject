@@ -1,0 +1,25 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="Django" />
+          <option value="djangorestframework" />
+          <option value="django-cors-headers" />
+          <option value="Pillow" />
+          <option value="django-filter" />
+          <option value="channels" />
+          <option value="channels-redis" />
+          <option value="daphne" />
+          <option value="celery" />
+          <option value="redis" />
+          <option value="reportlab" />
+          <option value="matplotlib" />
+          <option value="pandas" />
+          <option value="django-push-notifications" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

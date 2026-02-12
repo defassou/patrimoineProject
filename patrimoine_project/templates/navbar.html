@@ -1,0 +1,47 @@
+<nav class="navbar">
+    <div class="container">
+        <a href="{% url 'home' %}" class="logo">
+            <i class="fas fa-landmark"></i>
+            <span>Gestion Patrimoine</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Accueil</a></li>
+            <li><a href="{% url 'dashboard' %}">Tableau de bord</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">
+                    Patrimoine <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="{% url 'biens' %}">Mes Biens</a>
+                    <a href="{% url 'investissements' %}">Investissements</a>
+                    <a href="{% url 'revenus' %}">Revenus</a>
+                </div>
+            </li>
+            <li><a href="{% url 'rapports' %}">Rapports</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            {% if user.is_authenticated %}
+                <div class="user-menu">
+                    <button class="user-btn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>{{ user.username }}</span>
+                    </button>
+                    <div class="user-dropdown">
+                        <a href="{% url 'profile' %}">Mon Profil</a>
+                        <a href="{% url 'settings' %}">Paramètres</a>
+                        <a href="{% url 'logout' %}">Déconnexion</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-login">Connexion</a>
+                <a href="{% url 'register' %}" class="btn-register">Inscription</a>
+            {% endif %}
+        </div>
+        <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">📊 Dashboard Statistiques</h1>
+
+<div class="row">
+
+    <!-- BUREAUX -->
+    <div class="col-md-4">
+        <div class="card bg-primary text-white mb-3">
+            <div class="card-body">
+                <h5>Bureaux</h5>
+                <p>Total : {{ total_bureaux }}</p>
+                <p>Surface totale : {{ surface_totale_bureaux }} m²</p>
+                <p>Capacité totale : {{ capacite_totale_bureaux }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SALLES -->
+    <div class="col-md-4">
+        <div class="card bg-success text-white mb-3">
+            <div class="card-body">
+                <h5>Salles</h5>
+                <p>Total : {{ total_salles }}</p>
+                <p>Disponibles : {{ salles_disponibles }}</p>
+                <p>Surface totale : {{ surface_totale_salles }} m²</p>
+                <p>Capacité totale : {{ capacite_totale_salles }}</p>
+                <p>Taux moyen occupation : {{ taux_moyen }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MATERIEL -->
+    <div class="col-md-4">
+        <div class="card bg-warning mb-3">
+            <div class="card-body">
+                <h5>Matériels</h5>
+                <p>Total : {{ total_materiel }}</p>
+                <p>Valeur totale : {{ valeur_totale }} €</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<h3>Répartition du matériel par état</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>État</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in repartition_etat %}
+        <tr>
+            <td>{{ item.etat }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

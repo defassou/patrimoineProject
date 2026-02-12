@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion du Patrimoine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .stat-card.salles .stat-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .stat-card.bureaux .stat-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .stat-card.materiels .stat-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .list-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .list-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .list-item h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .list-item p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .list-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏢 Gestion du Patrimoine</h1>
+            <p>Tableau de bord de gestion des ressources</p>
+        </header>
+
+        <!-- Statistiques principales -->
+        <div class="stats-grid">
+            <div class="stat-card salles">
+                <div class="stat-card-header">
+                    <div class="stat-icon">🏛️</div>
+                </div>
+                <div class="stat-number">{{ salles.count }}</div>
+                <div class="stat-label">Salles</div>
+            </div>
+
+            <div class="stat-card bureaux">
+                <div class="stat-card-header">
+                    <div class="stat-icon">🪑</div>
+                </div>
+                <div class="stat-number">{{ bureaux.count }}</div>
+                <div class="stat-label">Bureaux</div>
+            </div>
+
+            <div class="stat-card materiels">
+                <div class="stat-card-header">
+                    <div class="stat-icon">💻</div>
+                </div>
+                <div class="stat-number">{{ materiels.count }}</div>
+                <div class="stat-label">Matériels</div>
+            </div>
+        </div>
+
+        <!-- Liste des Salles -->
+        <div class="content-section">
+            <h2 class="section-title">📍 Salles disponibles</h2>
+            {% if salles %}
+                <div class="list-grid">
+                    {% for salle in salles %}
+                    <div class="list-item">
+                        <h4>{{ salle.nom }}</h4>
+                        <p>{{ salle.description|default:"Aucune description" }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Aucune salle enregistrée</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Liste des Bureaux -->
+        <div class="content-section">
+            <h2 class="section-title">🪑 Bureaux</h2>
+            {% if bureaux %}
+                <div class="list-grid">
+                    {% for bureau in bureaux %}
+                    <div class="list-item">
+                        <h4>{{ bureau.nom }}</h4>
+                        <p>{{ bureau.localisation|default:"Non spécifié" }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Aucun bureau enregistré</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Liste des Matériels -->
+        <div class="content-section">
+            <h2 class="section-title">💼 Matériels</h2>
+            {% if materiels %}
+                <div class="list-grid">
+                    {% for materiel in materiels %}
+                    <div class="list-item">
+                        <h4>{{ materiel.nom }}</h4>
+                        <p>{{ materiel.type|default:"Type non spécifié" }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Aucun matériel enregistré</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Boutons d'action (optionnel) -->
+        <!-- Décommente si tu veux ajouter des liens vers des pages d'ajout
+        <div class="content-section">
+            <h2 class="section-title">Actions rapides</h2>
+            <div class="action-buttons">
+                <a href="{% url 'add_salle' %}" class="btn btn-primary">➕ Ajouter une salle</a>
+                <a href="{% url 'add_bureau' %}" class="btn btn-primary">➕ Ajouter un bureau</a>
+                <a href="{% url 'add_materiel' %}" class="btn btn-primary">➕ Ajouter du matériel</a>
+            </div>
+        </div>
+        -->
+    </div>
+</body>
+</html>

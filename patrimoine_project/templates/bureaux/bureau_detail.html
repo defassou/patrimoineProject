@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Détail du Bureau</h2>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Nom :</strong> {{ bureau.nom }}</li>
+    <li class="list-group-item"><strong>Type :</strong> {{ bureau.get_type_bureau_display }}</li>
+    <li class="list-group-item"><strong>Niveau :</strong> {{ bureau.niveau }}</li>
+    <li class="list-group-item"><strong>Surface :</strong> {{ bureau.surface }} m²</li>
+    <li class="list-group-item"><strong>Capacité :</strong> {{ bureau.capacite }}</li>
+</ul>
+
+<a href="{% url 'bureau_list' %}" class="btn btn-secondary mt-3">Retour</a>
+{% endblock %}

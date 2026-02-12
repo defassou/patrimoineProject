@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c1cac429-e0fb-4063-86c2-1bb82c7f6811" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/patrimoine_project.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/patrimoine/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/patrimoine/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/css/mains.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/html/css.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/html/js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/html/js_print.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/images/branding.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/js/personnel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/js/style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/static/script.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/templates/base/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/patrimoine_project/templates/base/navbar.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="39Qua4nPWVTQPY6KVCHFVb85t5g" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/hp EliteBook/PycharmProjects/patrimoine_project/patrimoine_project/templates",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hp EliteBook\PycharmProjects\patrimoine_project\patrimoine_project\templates" />
+      <recent name="C:\Users\hp EliteBook\PycharmProjects\patrimoine_project\patrimoine_project" />
+      <recent name="C:\Users\hp EliteBook\PycharmProjects\patrimoine_project\patrimoine_project\patrimoine_project" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c1cac429-e0fb-4063-86c2-1bb82c7f6811" name="Changes" comment="" />
+      <created>1770640676885</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770640676885</updated>
+    </task>
+    <servers />
+  </component>
+</project>

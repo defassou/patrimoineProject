@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Liste des Matériels</h2>
+
+<a href="{% url 'materiel_create' %}" class="btn btn-primary mb-3">+ Ajouter</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Localisation</th>
+            <th>Quantité</th>
+            <th>État</th>
+            <th>Valeur Totale</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for materiel in materiels %}
+        <tr>
+            <td>{{ materiel.nom }}</td>
+            <td>{{ materiel.get_localisation }}</td>
+            <td>{{ materiel.quantite }}</td>
+            <td>{{ materiel.get_etat_display }}</td>
+            <td>{{ materiel.get_valeur_totale }}</td>
+            <td>
+                <a href="{% url 'materiel_detail' materiel.pk %}" class="btn btn-info btn-sm">Voir</a>
+                <a href="{% url 'materiel_update' materiel.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+                <a href="{% url 'materiel_delete' materiel.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
