@@ -1,12 +1,68 @@
-{% extends 'base.html' %}
-
+{% extends 'main.html' %}
 {% block content %}
-<h2>Formulaire Bureau</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    <a href="{% url 'bureau_list' %}" class="btn btn-secondary">Annuler</a>
-</form>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-building"></i>
+                Ajouter un bureau
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.type_bureau.label }}</label>
+                        {{ form.type_bureau }}
+                        <div class="text-danger small">{{ form.type_bureau.errors }}</div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.nom.label }}</label>
+                        {{ form.nom }}
+                        <div class="text-danger small">{{ form.nom.errors }}</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.niveau.label }}</label>
+                    {{ form.niveau }}
+                    <div class="text-danger small">{{ form.niveau.errors }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.surface.label }}</label>
+                        {{ form.surface }}
+                        <div class="text-danger small">{{ form.surface.errors }}</div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.capacite.label }}</label>
+                        {{ form.capacite }}
+                        <div class="text-danger small">{{ form.capacite.errors }}</div>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <a href="{% url 'bureau_list' %}" class="btn btn-primary">Annuler</a>
+                    <button type="submit" class="btn btn-primary">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

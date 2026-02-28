@@ -33,10 +33,8 @@ class Bureau(models.Model):
         help_text="Étage ou niveau du bureau"
     )
     # Champs supplémentaires recommandés
-    surface = models.DecimalField(
+    surface = models.FloatField(
         "Surface (m²)",
-        max_digits=10,
-        decimal_places=2,
         null=True,
         blank=True,
         validators=[MinValueValidator(0.01)],
@@ -103,10 +101,8 @@ class Salle(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(1000)],
         help_text="Nombre maximum de personnes"
     )
-    surface = models.DecimalField(
+    surface = models.FloatField(
         "Surface (m²)",
-        max_digits=10,
-        decimal_places=2,
         null=True,
         blank=True,
         validators=[MinValueValidator(0.01)],
@@ -131,6 +127,11 @@ class Salle(models.Model):
     date_modification = models.DateTimeField(
         "Date de modification",
         auto_now=True
+    )
+    picture = models.ImageField(
+        "photo de la salle",
+        blank=True
+
     )
 
     def __str__(self):
@@ -185,10 +186,10 @@ class Materiel(models.Model):
         default=""
     )
     description = models.TextField(
-        "Description",
-        blank=True,
-        default="",
-        help_text="Description détaillée du matériel"
+    "Description",
+    blank=True,
+    default="",
+    help_text="Description détaillée du matériel"
     )
     quantite = models.IntegerField(
         "Quantité",
@@ -216,7 +217,7 @@ class Materiel(models.Model):
         blank=True
     )
     prix_unitaire = models.DecimalField(
-        "Prix unitaire (€)",
+        "Prix unitaire (GNF)",
         max_digits=10,
         decimal_places=2,
         null=True,

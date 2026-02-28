@@ -1,47 +1,141 @@
-<nav class="navbar">
-    <div class="container">
-        <a href="{% url 'home' %}" class="logo">
-            <i class="fas fa-landmark"></i>
-            <span>Gestion Patrimoine</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Accueil</a></li>
-            <li><a href="{% url 'dashboard' %}">Tableau de bord</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropbtn">
-                    Patrimoine <i class="fas fa-chevron-down"></i>
-                </a>
-                <div class="dropdown-content">
-                    <a href="{% url 'biens' %}">Mes Biens</a>
-                    <a href="{% url 'investissements' %}">Investissements</a>
-                    <a href="{% url 'revenus' %}">Revenus</a>
-                </div>
-            </li>
-            <li><a href="{% url 'rapports' %}">Rapports</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
-        </ul>
-        <div class="nav-actions">
-            {% if user.is_authenticated %}
-                <div class="user-menu">
-                    <button class="user-btn">
-                        <i class="fas fa-user-circle"></i>
-                        <span>{{ user.username }}</span>
-                    </button>
-                    <div class="user-dropdown">
-                        <a href="{% url 'profile' %}">Mon Profil</a>
-                        <a href="{% url 'settings' %}">Paramètres</a>
-                        <a href="{% url 'logout' %}">Déconnexion</a>
-                    </div>
-                </div>
-            {% else %}
-                <a href="{% url 'login' %}" class="btn-login">Connexion</a>
-                <a href="{% url 'register' %}" class="btn-register">Inscription</a>
-            {% endif %}
-        </div>
-        <div class="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f0e8;
+      --accent: #f5c518;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 2px solid var(--accent);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-logo span em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s, color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-right-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-right-logo svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav-right-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <!-- Logo gauche -->
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="8" fill="#f5c518"/>
+      <path d="M10 28 L20 12 L30 28" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 22 H26" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <span>Mon<em>Site</em></span>
+  </a>
+
+  <!-- Liens du milieu -->
+  <ul class="nav-links">
+    <li><a href="#">Accueil</a></li>
+    <li><a href="#">À propos</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+
+  <!-- Logo droit -->
+  <a href="#" class="nav-right-logo">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#f5c518" stroke-width="2"/>
+      <path d="M11 18 C11 14 14 11 18 11 C22 11 25 14 25 18 C25 22 22 25 18 25" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="18" cy="18" r="3" fill="#f5c518"/>
+    </svg>
+    <span>Studio</span>
+  </a>
 </nav>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Gestion du patrimoine - DIMG CNT</h4>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Détail Salle: {{ salle.nom }}</h4>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+
+            <div class="col col-md-4">
+                {% if salle.picture %}
+                    <div class="text-center mb-4">
+                        <img src="{{ salle.picture.url }}"
+                             alt="Photo de {{ salle.nom }}"
+                             class="img-fluid rounded shadow"
+                             style="max-height: 350px; object-fit: cover;">
+                    </div>
+                {% else %}
+                    <div class="alert alert-secondary text-center">
+                        Aucune photo disponible pour cette salle.
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col col-md-8">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Nom :</strong> {{ salle.nom }}</li>
+                    <li class="list-group-item"><strong>Type :</strong> {{ salle.get_type_salle_display }}</li>
+                    <li class="list-group-item"><strong>Niveau :</strong> {{ salle.niveau }}</li>
+                    <li class="list-group-item"><strong>Surface :</strong> {{ salle.surface }} m²</li>
+                    <li class="list-group-item"><strong>Capacité :</strong> {{ salle.capacite }}</li>
+                    <li class="list-group-item"><strong>Taux occupation :</strong> {{ salle.get_taux_occupation }}</li>
+                    <li class="list-group-item"><strong>Equipements :</strong> {{ salle.equipements }}</li>
+                </ul>
+            </div>
+
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="table-container">
+            <table class="table align-items-center table-flush">
+                <thead class="thead-warning">
+                <tr bgcolor="#00bfff">
+                    <th scope="col" class="sort " data-sort="nom">Nom</th>
+                    <th scope="col" class="sort " data-sort="Description">Description</th>
+                    <th scope="col" class="sort " data-sort="qt">Quantité(s)</th>
+                    <th scope="col" class="sort " data-sort="etat">État</th>
+                    <th scope="col" class="sort " data-sort="vtotalz">Valeur Totale</th>
+                    <th scope="col" class="sort " data-sort="detail">Actions</th>
+                </tr>
+                </thead>
+                <tbody class="list">
+                {% for materiel in materiels %}
+                <tr>
+                    <td>{{ materiel.nom }}</td>
+                    <td>{{ materiel.description }}</td>
+                    <td>{{ materiel.quantite }}</td>
+                    <td>{{ materiel.get_etat_display }}</td>
+                    <td>{{ materiel.get_valeur_totale }}</td>
+                    <td>
+                        <a class="btn btn-success btn-sm" href="{% url 'materiel_detail' materiel.pk %}">Voir</a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'materiel_update' materiel.pk %}">Modifier</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'materiel_delete' materiel.pk %}">Supprimer</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<a class="btn btn-primary mt-4" href="{% url 'salle_list' %}"><i class="fas fa-times"></i> Retour</a>
+<br>
+<br>
+{% endblock %}

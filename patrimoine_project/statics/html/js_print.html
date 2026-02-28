@@ -1,0 +1,23 @@
+{% load static %}
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'pages/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'pages/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<script>
+    var printable = document.getElementById("print-button");
+/*
+    printable.addEventListener("click", function () {
+        //console.log(file);
+        //form.submit();
+        console.log('printer ok!');
+        print('#printable');
+    });*/
+
+    document.getElementById("print-button").addEventListener("click", function() {
+        var printContents = document.getElementById('printable').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+   });
+</script>

@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-door-open"></i>
+                Ajouter une salle
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.type_salle.label }}</label>
+                        {{ form.type_salle }}
+                        {{ form.type_salle.errors }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.nom.label }}</label>
+                        {{ form.nom }}
+                        {{ form.nom.errors }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.niveau.label }}</label>
+                    {{ form.niveau }}
+                    {{ form.niveau.errors }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.capacite.label }}</label>
+                        {{ form.capacite }}
+                        {{ form.capacite.errors }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.surface.label }}</label>
+                        {{ form.surface }}
+                        {{ form.surface.errors }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.equipements.label }}</label>
+                    {{ form.equipements }}
+                    {{ form.equipements.errors }}
+                </div>
+
+                <div class="form-check mb-3">
+                    {{ form.disponible }}
+                    <label class="form-check-label">
+                        {{ form.disponible.label }}
+                    </label>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.picture.label }}</label>
+                    {{ form.picture }}
+                    {{ form.picture.errors }}
+                </div>
+
+                <div class="text-end">
+                    <a href="{% url 'salle_list' %}" class="btn btn-primary">Annuler</a>
+                    <button type="submit" class="btn btn-success">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

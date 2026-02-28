@@ -1,11 +1,22 @@
 {% load static %}
-
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <img src="{% static 'images/logo.png' %}" width="70" height="70" alt="" class="rounded-circle"/>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link text-white" href="">Dashboard</a>
+          <a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'salle_list' %}">Salle</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'bureau_list' %}">Bureau</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="{% url 'materiel_list' %}">Matériel</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-white" href="">Véhicule</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link text-white" href="">Téléphone: +224 622 93 95 11</a>
@@ -14,7 +25,7 @@
           <a class="nav-link text-white" href="">Email: dimg@cnt.gov.gn</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link text-white" href="">Direction des infrasttructures et des moyens généraux </a>
+          <a class="nav-link text-white" href="">Direction des Infrastructures et des Moyens Généraux </a>
         </li>
       </ul>
     </div>

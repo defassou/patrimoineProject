@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Bureau, Salle, Materiel
 
 
+admin.site.index_title = "Manager"
+admin.site.site_header = "Gestion du patrimoine"
+
+
 # Register your models here.
 class AdminSalle(admin.ModelAdmin):
     list_display = ('nom', 'type_salle', 'niveau')

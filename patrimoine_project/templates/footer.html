@@ -1,79 +1,108 @@
-<footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h3>
-                    <i class="fas fa-landmark"></i>
-                    Gestion Patrimoine
-                </h3>
-                <p>
-                    Votre partenaire de confiance pour la gestion et l'optimisation
-                    de votre patrimoine immobilier et financier.
-                </p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Footer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --yellow: #f5c518;
+      --yellow-dark: #d4a800;
+      --yellow-light: #fff8d6;
+    }
 
-            <div class="footer-section links">
-                <h4>Liens rapides</h4>
-                <ul>
-                    <li><a href="{% url 'home' %}">Accueil</a></li>
-                    <li><a href="{% url 'about' %}">À propos</a></li>
-                    <li><a href="{% url 'services' %}">Nos Services</a></li>
-                    <li><a href="{% url 'faq' %}">FAQ</a></li>
-                    <li><a href="{% url 'blog' %}">Blog</a></li>
-                </ul>
-            </div>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-            <div class="footer-section services">
-                <h4>Nos Services</h4>
-                <ul>
-                    <li><a href="#">Gestion Immobilière</a></li>
-                    <li><a href="#">Conseil en Investissement</a></li>
-                    <li><a href="#">Optimisation Fiscale</a></li>
-                    <li><a href="#">Succession & Transmission</a></li>
-                    <li><a href="#">Assurance Vie</a></li>
-                </ul>
-            </div>
+    footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--yellow);
+      border-top: 3px solid var(--yellow-dark);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
 
-            <div class="footer-section contact">
-                <h4>Contact</h4>
-                <ul>
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>123 Avenue des Champs-Élysées<br>75008 Paris, France</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-phone"></i>
-                        <span>+33 1 23 45 67 89</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <span>contact@gestionpatrimoine.fr</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-clock"></i>
-                        <span>Lun - Ven: 9h - 18h</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    .footer-logo-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
 
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p>&copy; {% now "Y" %} Gestion Patrimoine. Tous droits réservés.</p>
-                <div class="footer-legal">
-                    <a href="{% url 'privacy' %}">Politique de confidentialité</a>
-                    <span>|</span>
-                    <a href="{% url 'terms' %}">Conditions d'utilisation</a>
-                    <span>|</span>
-                    <a href="{% url 'mentions' %}">Mentions légales</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    .footer-logo-left svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer-logo-left span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-center {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.6;
+    }
+
+    .footer-logo-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-logo-right svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer-logo-right span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<footer>
+  <!-- Logo gauche -->
+  <a href="#" class="footer-logo-left">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="6" fill="#0a0a0a"/>
+      <path d="M9 26 L18 10 L27 26" stroke="#f5c518" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12.5 20 H23.5" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span>MonSite</span>
+  </a>
+
+  <!-- Texte centre -->
+  <span class="footer-center">© 2025 MonSite — Tous droits réservés</span>
+
+  <!-- Logo droit -->
+  <a href="#" class="footer-logo-right">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="16" fill="#0a0a0a"/>
+      <path d="M12 22 C12 16 15 13 18 13 C21 13 24 16 24 19" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+      <path d="M18 20 L22 24 L26 20" stroke="#f5c518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Studio</span>
+  </a>
 </footer>
+
+</body>
+</html>

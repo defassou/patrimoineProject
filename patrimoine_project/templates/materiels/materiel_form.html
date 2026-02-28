@@ -1,12 +1,86 @@
-{% extends 'base.html' %}
-
+{% extends "main.html" %}
 {% block content %}
-<h2>Formulaire Matériel</h2>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Enregistrer</button>
-    <a href="{% url 'materiel_list' %}" class="btn btn-secondary">Annuler</a>
-</form>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-tools"></i>
+                Ajouter du matériel
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.salle.label }}</label>
+                        {{ form.salle }}
+                        {{ form.salle.errors }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">{{ form.bureau.label }}</label>
+                        {{ form.bureau }}
+                        {{ form.bureau.errors }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.nom.label }}</label>
+                    {{ form.nom }}
+                    {{ form.nom.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.description.label }}</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">{{ form.quantite.label }}</label>
+                        {{ form.quantite }}
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">{{ form.etat.label }}</label>
+                        {{ form.etat }}
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">{{ form.prix_unitaire.label }}</label>
+                        {{ form.prix_unitaire }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.numero_serie.label }}</label>
+                    {{ form.numero_serie }}
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">{{ form.date_acquisition.label }}</label>
+                    {{ form.date_acquisition }}
+                </div>
+
+                <div class="text-end">
+                    <a href="{% url 'materiel_list' %}" class="btn btn-primary">Annuler</a>
+                    <button type="submit" class="btn btn-dark">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

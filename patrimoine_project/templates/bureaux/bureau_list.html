@@ -1,35 +1,87 @@
-{% extends 'base.html' %}
-{% block title %}Liste des Bureaux{% endblock %}
-
+{% extends 'main.html' %}
+{% load static %}
 {% block content %}
-<h2>Liste des Bureaux</h2>
-
-<a href="{% url 'bureau_create' %}" class="btn btn-primary mb-3">+ Ajouter</a>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>Niveau</th>
-            <th>Capacité</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for bureau in bureaux %}
-        <tr>
-            <td>{{ bureau.nom }}</td>
-            <td>{{ bureau.get_type_bureau_display }}</td>
-            <td>{{ bureau.niveau }}</td>
-            <td>{{ bureau.capacite }}</td>
-            <td>
-                <a href="{% url 'bureau_detail' bureau.pk %}" class="btn btn-info btn-sm">Voir</a>
-                <a href="{% url 'bureau_update' bureau.pk %}" class="btn btn-warning btn-sm">Modifier</a>
-                <a href="{% url 'bureau_delete' bureau.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Gestion du patrimoine - DIMG CNT</h4>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+  <div class="col-md-4 text-end">
+    <a href="{% url 'bureau_create' %}" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Nouveau Bureau
+    </a>
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="card-body">
+                <form method="get" class="mb-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control"
+                               placeholder="Rechercher par niveau, nom, type..."
+                               value="{{ search_query }}">
+                        <button class="btn btn-primary" type="submit">
+                              <i class="fas fa-search"></i> Rechercher
+                        </button>
+                        {% if search_query %}
+                        <a href="{% url 'bureau_list' %}" class="btn btn-primary">
+                            <i class="fas fa-times"></i> Réinitialiser
+                        </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            {% if bureaux %}
+            <div class="table-container">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-warning">
+                    <tr bgcolor="#00bfff">
+                        <th scope="col" class="sort " data-sort="nom">Nom</th>
+                        <th scope="col" class="sort " data-sort="tipe">Type</th>
+                        <th scope="col" class="sort " data-sort="nivea">Niveau</th>
+                        <th scope="col" class="sort " data-sort="capa">Capacité</th>
+                        <th scope="col" class="sort " data-sort="act">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for bureau in bureaux %}
+                    <tr>
+                        <td>{{ bureau.nom }}</td>
+                        <td>{{ bureau.get_type_bureau_display }}</td>
+                        <td>{{ bureau.niveau }}</td>
+                        <td>{{ bureau.capacite }}</td>
+                        <td>
+                            <a href="{% url 'bureau_detail' bureau.pk %}" class="btn btn-success btn-sm">Voir</a>
+                            <a href="{% url 'bureau_update' bureau.pk %}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{% url 'bureau_delete' bureau.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                {% if search_query %}
+                Aucun bureau trouvé pour "{{ search_query }}".
+                {% else %}
+                Aucun bureau enregistré.
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+  <div class="col-md-4 text-end">
+    <a class="btn btn-primary" href="{% url 'bureau_list' %}">
+      <i class="fas fa-times"></i> Retour à la liste
+    </a>
+  </div>
+</div>
 {% endblock %}

@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'main.html' %}
+{% block content %}
 
-</body>
-</html>
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Gestion du patrimoine - DIMG CNT</h4>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Détail Matériel: {{ materiel.nom }}</h4>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Nom :</strong> {{ materiel.nom }}</li>
+                <li class="list-group-item"><strong>Description :</strong> {{ materiel.description }}</li>
+                <li class="list-group-item"><strong>Numéro de série :</strong> {{ materiel.numero_serie }}</li>
+                <li class="list-group-item"><strong>Prix unitaire :</strong> {{ materiel.prix_unitaire }}</li>
+                <li class="list-group-item"><strong>Date d'acquisition :</strong> {{ materiel.date_acquisition }}</li>
+                <li class="list-group-item"><strong>Date de modification :</strong> {{ materiel.date_modification }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<a href="{% url 'materiel_list' %}" class="btn btn-primary mt-4"><i class="fas fa-times"></i> Retour</a>
+<br>
+<br>
+
+{% endblock %}

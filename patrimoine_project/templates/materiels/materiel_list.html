@@ -1,36 +1,90 @@
-{% extends 'base.html' %}
-
+{% extends 'main.html' %}
 {% block content %}
-<h2>Liste des Matériels</h2>
+{% load static %}
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <h4 class="text text-center">Gestion du patrimoine - DIMG CNT</h4>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-4 text-end">
+        <a class="btn btn-primary" href="{% url 'materiel_create' %}">
+            <i class="fas fa-plus"></i> Nouveau Matériel
+        </a>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+		<div class="col-md-12">
+			<div class="card-body">
+                <form method="get" class="mb-4">
+                    <div class="input-group">
+                        <input class="form-control" name="search" placeholder="Rechercher par nom, etat..."
+                               type="text"
+                               value="{{ search_query }}"/>
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Rechercher
+                        </button>
+                        {% if search_query %}
+                            <a class="btn btn-secondary" href="{% url 'materiel_list' %}">
+                                <i class="fas fa-times"></i> Réinitialiser
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            {% if materiels %}
+            <div class="table-container">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-warning">
+                    <tr bgcolor="#00bfff">
+                        <th scope="col" class="sort " data-sort="nom">Nom</th>
+                        <th scope="col" class="sort " data-sort="locale">Localisation</th>
+                        <th scope="col" class="sort " data-sort="qt">Quantité(s)</th>
+                        <th scope="col" class="sort " data-sort="etat">État</th>
+                        <th scope="col" class="sort " data-sort="vtotalz">Valeur Totale</th>
+                        <th scope="col" class="sort " data-sort="detail">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="list">
+                    {% for materiel in materiels %}
+                    <tr>
+                        <td>{{ materiel.nom }}</td>
+                        <td>{{ materiel.get_localisation }}</td>
+                        <td>{{ materiel.quantite }}</td>
+                        <td>{{ materiel.get_etat_display }}</td>
+                        <td>{{ materiel.get_valeur_totale }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm" href="{% url 'materiel_detail' materiel.pk %}">Voir</a>
+                            <a class="btn btn-warning btn-sm" href="{% url 'materiel_update' materiel.pk %}">Modifier</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'materiel_delete' materiel.pk %}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                {% if search_query %}
+                Aucun matériel trouvé pour "{{ search_query }}".
+                {% else %}
+                Aucun matériel enregistré.
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
-<a href="{% url 'materiel_create' %}" class="btn btn-primary mb-3">+ Ajouter</a>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Localisation</th>
-            <th>Quantité</th>
-            <th>État</th>
-            <th>Valeur Totale</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for materiel in materiels %}
-        <tr>
-            <td>{{ materiel.nom }}</td>
-            <td>{{ materiel.get_localisation }}</td>
-            <td>{{ materiel.quantite }}</td>
-            <td>{{ materiel.get_etat_display }}</td>
-            <td>{{ materiel.get_valeur_totale }}</td>
-            <td>
-                <a href="{% url 'materiel_detail' materiel.pk %}" class="btn btn-info btn-sm">Voir</a>
-                <a href="{% url 'materiel_update' materiel.pk %}" class="btn btn-warning btn-sm">Modifier</a>
-                <a href="{% url 'materiel_delete' materiel.pk %}" class="btn btn-danger btn-sm">Supprimer</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="row mb-4">
+  <div class="col-md-4 text-end">
+    <a class="btn btn-primary" href="{% url 'materiel_list' %}">
+      <i class="fas fa-times"></i> Retour à la liste
+    </a>
+  </div>
+</div>
 {% endblock %}

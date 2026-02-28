@@ -1,46 +1,69 @@
 {% load static %}
   <nav class="navbar navbar-expand-lg fixed-left navbar-top bg-primary">
     <div class="collapse navbar-collapse" id="navbarNav">
+
       <ul class="navbar-nav">
         <img src="{% static 'images/logo.png' %}" width="70" height="70" alt="" class="rounded-circle"/>
         <li class="nav-item active">
-          <a class="nav-link text-white" href="">Dashboard</a>
+          <a class="nav-link text-white" href="{% url 'dashboard' %}">Dashboard</a>
         </li>
-
-        <!-- Dropdown Parlement -->
+        <!-- Dropdown Salles -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle  text-white" href="" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
-                Structure parlementaire
+                Salles
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'list_salle' %}">Salles</a></li>
-                <li><a class="dropdown-item" href="{% url 'list_bureau' %}">Bureaux</a></li>
-                <li><a class="dropdown-item" href="{% url 'list_materiel' %}">Equipements</a></li>
+                <li><a class="dropdown-item" href="{% url 'salle_reunion' %}">Réunion</a></li>
+                <li><a class="dropdown-item" href="{% url 'salle_conference' %}">Conférence</a></li>
+                <li><a class="dropdown-item" href="{% url 'salle_pleniere' %}">Plénière</a></li>
+                <li><a class="dropdown-item" href="{% url 'salle_formation' %}">Formation</a></li>
             </ul>
         </li>
-
-        {% comment %}<li class="nav-item">
-          <a class="nav-link text-white" href="">Personnel</a>
-        </li>{% endcomment %}
-          <!-- Dropdown Personnel -->
+          <!-- Dropdown Bureaux -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle  text-white" href="" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
-                Gestion du Personnel
+                Bureaux
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="">Liste du personnel</a></li>
-                <li><a class="dropdown-item" href="">Liste des congés</a></li>
-
+                <li><a class="dropdown-item" href="{% url 'bureau_box' %}">Box office</a></li>
+                <li><a class="dropdown-item" href="{% url 'bureau_cloisonne' %}">Cloisonné</a></li>
+                <li><a class="dropdown-item" href="{% url 'bureau_open' %}">Open Office</a></li>
+                <li><a class="dropdown-item" href="{% url 'bureau_entier' %}">Entier</a></li>
+            </ul>
+        </li>
+          <!-- Dropdown Materiels -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle  text-white" href="" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                Matériels
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'materiel_bon' %}">Bon état</a></li>
+                <li><a class="dropdown-item" href="{% url 'materiel_moyen' %}">État moyen</a></li>
+                <li><a class="dropdown-item" href="{% url 'materiel_mauvais' %}">Mauvais état</a></li>
+                <li><a class="dropdown-item" href="{% url 'materiel_hs' %}">Hors service</a></li>
+                <li><a class="dropdown-item" href="{% url 'materiel_autre' %}">Autre</a></li>
+            </ul>
+        </li>
+          <!-- Dropdown Parc Auto -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle  text-white" href="" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                Parc Auto
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="">Bon état</a></li>
+                <li><a class="dropdown-item" href="">État moyen</a></li>
+                <li><a class="dropdown-item" href="">Mauvais état</a></li>
+                <li><a class="dropdown-item" href="">Hors service</a></li>
+                <li><a class="dropdown-item" href="">Autre</a></li>
             </ul>
         </li>
       </ul>
-
     </div>
-
-
-    {% comment %}<a class="nav-link text-white" href="">Bienvenue à: </a>{% endcomment %}
+    {% comment %}<a class="nav-link text-white" href="">Bienvenue à:  {{request.user}}</a>{% endcomment %}
     <a class="nav-link text-white" href=""></a>
     <a class="nav-link text-white" href="">Déconnexion</a>
     <img src="{% static 'images/branding.webp' %}" width="70" height="70" alt="" class="rounded-circle"/>

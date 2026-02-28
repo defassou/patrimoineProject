@@ -1,25 +1,300 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Gestion Patrimoine{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/navbar_footer.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    {% block extra_css %}{% endblock %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Base Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── Variables ─────────────────────────────── */
+    :root {
+      --black:       #0a0a0a;
+      --white:       #f5f0e8;
+      --accent:      #f5c518;
+      --accent-dark: #d4a800;
+      --gray:        #1c1c1c;
+      --text-muted:  rgba(245,240,232,0.55);
+    }
+
+    /* ─── Reset ──────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      padding-top: 64px;   /* espace navbar */
+      padding-bottom: 60px; /* espace footer */
+    }
+
+    /* ════════════════════════════════════════════
+       NAVBAR FIXE
+    ════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 2px solid var(--accent);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    /* Logo gauche */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo svg { width: 36px; height: 36px; }
+    .nav-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span em { color: var(--accent); font-style: normal; }
+
+    /* Liens milieu */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Logo droit */
+    .nav-right-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .nav-right-logo svg { width: 32px; height: 32px; }
+    .nav-right-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    /* ════════════════════════════════════════════
+       FOOTER FIXE — JAUNE
+    ════════════════════════════════════════════ */
+    footer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--accent);
+      border-top: 3px solid var(--accent-dark);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    /* Logo gauche footer */
+    .footer-logo-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .footer-logo-left svg { width: 32px; height: 32px; }
+    .footer-logo-left span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+
+    /* Texte central footer */
+    .footer-center {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      opacity: 0.55;
+    }
+
+    /* Logo droit footer */
+    .footer-logo-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .footer-logo-right svg { width: 32px; height: 32px; }
+    .footer-logo-right span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+
+    /* ════════════════════════════════════════════
+       CONTENU PRINCIPAL
+    ════════════════════════════════════════════ */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 mark {
+      background: none;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 36px;
+      background: var(--accent);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--accent);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    /* ─── Responsive ───────────────────────────── */
+    @media (max-width: 640px) {
+      nav, footer { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      main { padding: 40px 20px; }
+    }
+  </style>
 </head>
 <body>
-    {% include 'navbar.html' %}
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+  <!-- ══ NAVBAR ══════════════════════════════════ -->
+  <nav>
+    <!-- Logo gauche -->
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="8" fill="#f5c518"/>
+        <path d="M10 28 L20 12 L30 28" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 22 H26" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span>Mon<em>Site</em></span>
+    </a>
 
-    {% include 'footer.html' %}
+    <!-- Liens milieu -->
+    <ul class="nav-links">
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">À propos</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
 
-    <script src="{% static 'js/navbar.js' %}"></script>
-    {% block extra_js %}{% endblock %}
+    <!-- Logo droit -->
+    <a href="#" class="nav-right-logo">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="17" stroke="#f5c518" stroke-width="2"/>
+        <path d="M11 18 C11 14 14 11 18 11 C22 11 25 14 25 18 C25 22 22 25 18 25" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="18" cy="18" r="3" fill="#f5c518"/>
+      </svg>
+      <span>Studio</span>
+    </a>
+  </nav>
+
+  <!-- ══ CONTENU PRINCIPAL ═══════════════════════ -->
+  <main>
+    <section class="hero">
+      <h1>Bienvenue sur <mark>MonSite</mark></h1>
+      <p>Un template de base propre et prêt à l'emploi avec une navbar et un footer fixes, et tout ce qu'il faut pour démarrer.</p>
+      <a href="#" class="hero-btn">Commencer →</a>
+    </section>
+  </main>
+
+  <!-- ══ FOOTER ══════════════════════════════════ -->
+  <footer>
+    <!-- Logo gauche -->
+    <a href="#" class="footer-logo-left">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" rx="6" fill="#0a0a0a"/>
+        <path d="M9 26 L18 10 L27 26" stroke="#f5c518" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12.5 20 H23.5" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>MonSite</span>
+    </a>
+
+    <!-- Texte centre -->
+    <span class="footer-center">© 2025 MonSite — Tous droits réservés</span>
+
+    <!-- Logo droit -->
+    <a href="#" class="footer-logo-right">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="16" fill="#0a0a0a"/>
+        <path d="M12 22 C12 16 15 13 18 13 C21 13 24 16 24 19" stroke="#f5c518" stroke-width="2" stroke-linecap="round"/>
+        <path d="M18 20 L22 24 L26 20" stroke="#f5c518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Studio</span>
+    </a>
+  </footer>
+
 </body>
 </html>
